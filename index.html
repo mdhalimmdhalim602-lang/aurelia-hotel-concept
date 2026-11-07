@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Aurelia — Concept Hotel Website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#070b14;--ink:#f3ead6;--gold:#d9c28a;--cream:#e8dcb8;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+header{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 34px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;animation:fd 1.4s .4s both;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.br{display:flex;align-items:center;gap:12px;cursor:pointer}.br i{font:normal 500 17px var(--serif);border:1px solid var(--ink);width:24px;height:24px;display:grid;place-items:center}.br span{opacity:.6}
+nav{display:flex;gap:26px;align-items:center}nav a{cursor:pointer;opacity:.85;transition:.3s}nav a:hover{opacity:1;color:var(--gold)}
+.cta{background:var(--cream);color:#1a1409;padding:9px 16px;letter-spacing:.16em;text-shadow:none}
+@keyframes fd{from{opacity:0;translate:0 -10px}}
+#st{position:fixed;inset:0}.sc{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s,visibility .6s}.sc.on{opacity:1;visibility:visible}
+#fd{position:fixed;inset:0;background:#000;z-index:25;opacity:0;pointer-events:none;transition:opacity .5s}#fd.on{opacity:1;pointer-events:auto}
+#tw{position:absolute;inset:0;width:100%;height:100%;animation:zi 3s cubic-bezier(.2,.8,.2,1) both}@keyframes zi{from{scale:1.12;opacity:0}}
+.fl{cursor:pointer}.bd{fill:transparent;transition:.25s}.fl.on .bd{fill:rgba(255,236,176,.26);stroke:#ffeab5;stroke-width:1.2}
+.tw1{animation:tl 4s ease-in-out infinite alternate}@keyframes tl{50%{opacity:.35}}.cl{animation:dr 60s linear infinite alternate}@keyframes dr{to{translate:120px 0}}.sh{animation:sm 5s ease-in-out infinite alternate}@keyframes sm{to{opacity:.1;translate:30px 0}}
+#tip{position:absolute;z-index:6;background:rgba(5,9,17,.93);border:1px solid rgba(217,194,138,.4);padding:13px 18px 14px;min-width:200px;opacity:0;pointer-events:none;transition:opacity .25s,translate .25s;translate:-10px 0;cursor:pointer}#tip.on{opacity:1;pointer-events:auto;translate:0 0}
+#tip small{font-size:9px;letter-spacing:.2em;color:var(--gold)}#tip b{font:600 30px/1 var(--serif);margin:0 10px 0 6px}#tip h4{font:600 17px var(--serif);display:inline}#tip p{font-size:11px;opacity:.8;margin:6px 0 9px}#tip em{font-style:normal;font-size:9px;letter-spacing:.14em;border:1px solid var(--gold);padding:4px 8px;text-transform:uppercase;color:var(--gold)}
+#tln{position:absolute;height:1px;background:#ffeab5;z-index:5;opacity:0;transition:opacity .25s;transform-origin:left}#tln.on{opacity:.9}
+.hint{position:absolute;left:34px;bottom:calc(30px + env(safe-area-inset-bottom,0px));font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.85;z-index:5}.hint:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:10px;animation:pu 1.6s infinite}
+.cr2{position:absolute;right:34px;bottom:calc(30px + env(safe-area-inset-bottom,0px));font-size:9px;opacity:.5;letter-spacing:.08em;z-index:5;text-align:right;max-width:46%}
+#s2{background:radial-gradient(ellipse at 40% 45%,#0f1a33,#060a14 70%)}#pl{position:absolute;left:0;top:0;width:calc(100% - 390px);height:100%}
+.o{opacity:0;animation:dp .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d)}@keyframes dp{from{opacity:0;translate:0 -22px}to{opacity:1;translate:0 0}}
+.hs{cursor:pointer}.hs .pu{fill:rgba(255,224,150,.55);transform-box:fill-box;transform-origin:center;animation:ps 2s infinite}.hs text{font:500 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;fill:#fff;opacity:0;transition:.25s;paint-order:stroke;stroke:#000;stroke-width:4px}.hs:hover text{opacity:1}
+@keyframes ps{to{scale:3.2;opacity:0}}@keyframes pu{50%{opacity:.3}}
+#pn{position:absolute;right:34px;top:50%;translate:0 -50%;width:340px;padding:24px 26px;background:rgba(6,10,18,.88);border:1px solid rgba(217,194,138,.22);animation:fd 1s .5s both;max-height:84%;overflow:auto}
+#pn small{font-size:10px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}#pn h2{font:600 38px/1.05 var(--serif);margin:8px 0 16px}
+.sts{display:flex;gap:22px;padding-bottom:14px;border-bottom:1px solid #26304a}.sts b{display:block;font:600 22px var(--serif)}.sts span{font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+.pr{margin:14px 0 8px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.9}.pr b{font:600 26px var(--serif);letter-spacing:0;margin:0 4px}
+#pd{font-size:12.5px;line-height:1.65;opacity:.78;margin-bottom:14px}
+#rl{list-style:none;margin-bottom:18px}#rl li{display:flex;justify-content:space-between;font-size:12px;padding:10px 0;border-top:1px solid #1d2740;cursor:pointer;transition:.25s}#rl li:hover{color:var(--gold);padding-left:6px}#rl li:before{content:"";width:5px;height:5px;background:var(--gold);border-radius:50%;align-self:center;margin-right:10px}#rl li span{flex:1}#rl li:after{content:"→"}
+.bt{display:flex;gap:10px}.bt button{flex:1;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:12px 8px;background:#000;border:1px solid #2a3350}.bt .cr{background:var(--cream);color:#1a1409;border-color:var(--cream)}
+#room{position:absolute;inset:0}#room svg,#room img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 14s ease-out both}@keyframes kb{from{scale:1.1}}
+#s3:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55)),linear-gradient(transparent 70%,rgba(0,0,0,.6));pointer-events:none}
+#cp{position:absolute;left:34px;bottom:calc(30px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;align-items:flex-end;gap:22px}#cp button{background:#000;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:12px 16px}#cp small{display:block;font-size:9px;letter-spacing:.2em;opacity:.85;text-transform:uppercase}#cp h2{font:600 32px var(--serif)}
+#sw{position:absolute;right:34px;bottom:calc(30px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;gap:8px}#sw button{font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:11px 14px;background:#000;transition:.3s}#sw button.on{background:var(--cream);color:#1a1409}
+@media(pointer:coarse){.hs text{opacity:1}}
+@media(max-width:820px){#tip{left:14px!important;right:14px;top:auto!important;bottom:70px;min-width:0;translate:0 10px}#tip.on{translate:0 0}#tln{display:none}#pn{padding:14px 16px}#pn h2{font-size:26px;margin:4px 0 8px}#pd{display:none}.sts{gap:16px;padding-bottom:8px}.sts b{font-size:17px}.pr{margin:8px 0}#rl{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}#rl li{border:1px solid #2a3350;padding:8px 10px;font-size:11px}#rl li:before,#rl li:after{display:none}.hs text{font-size:26px;stroke-width:6px}.hs circle:not(.pu){scale:1.8}header{padding:16px 18px}nav a:not(.cta){display:none}.br span{display:none}#pl{width:100%;height:50%}#pn{left:14px;right:14px;top:auto;bottom:14px;width:auto;translate:0 0;max-height:48%}.hint{left:18px}.cr2{display:none}#cp{left:14px;bottom:76px;flex-direction:column;align-items:flex-start;gap:10px}#sw{right:auto;left:14px;bottom:20px;flex-wrap:wrap}#sw button{padding:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style></head><body>
+<header><div class="br" id="hm"><i>A</i><b id="bn"></b><span id="bt"></span></div><nav><a id="n1">Rooms</a><a id="n2">Suites</a><a id="n3">Amenities</a><a class="cta" id="n4">Private tour</a></nav></header>
+<div id="st">
+<section class="sc on" id="s1"><svg id="tw" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"></svg><div id="tln"></div><div id="tip"></div><div class="hint">Hover a floor to explore</div><div class="cr2">Concept illustration · replace with property photography</div></section>
+<section class="sc" id="s2"><svg id="pl" viewBox="0 0 1000 600"></svg><aside id="pn"><small id="pf"></small><h2 id="pt"></h2><div class="sts"><div><b id="p1"></b><span>Beds</span></div><div><b id="p2"></b><span>Baths</span></div><div><b id="p3"></b><span>Sq ft</span></div></div><div class="pr">From <b id="pp"></b> / night</div><p id="pd"></p><ul id="rl"></ul><div class="bt"><button id="b1">Back to tower</button><button class="cr" id="b2">Reserve</button></div></aside></section>
+<section class="sc" id="s3"><div id="room"></div><div id="cp"><button id="b3">Back to floor plan</button><div><small id="c1"></small><h2 id="c2"></h2></div></div><div id="sw"></div></section>
+</div><div id="fd"></div>
+<script>
+/* ===== TEMPLATE CONFIG: change this block to re-skin the site for another hotel ===== */
+const CFG={brand:'THE AURELIA',tag:'Ghat View · Varanasi',cur:'₹',floors:[8,31],tiers:[
+{name:'Deluxe Room',to:13,bed:1,bath:1,area:480,price:14500,W:60,D:40,desc:'A calm river-facing room with a king bed, writing desk and a full-height window onto the water.',
+ rooms:[['bed','Bedroom',0,0,36,40,'#b98b55'],['bath','Bathroom',36,0,24,16,'#ded6c6'],['terr','River Balcony',36,16,24,24,'#7b5b36']],
+ f:[[8,12,16,20,6,'#eee2c6'],[6,12,2,20,14,'#8a6a43'],[28,2,6,12,9,'#a07a48'],[38,3,20,9,5,'#f4efe4'],[40,22,14,6,5,'#d9c28a']]},
+{name:'Executive Suite',to:23,bed:1,bath:1.5,area:780,price:24000,W:70,D:40,desc:'A separate living room, a spacious bedroom and a marble bath, framed by wide windows over the river.',
+ rooms:[['living','Living Room',0,0,34,40,'#b98b55'],['bed','Bedroom',34,0,36,26,'#b98b55'],['bath','Bathroom',34,26,36,14,'#ded6c6']],
+ f:[[4,24,22,9,6,'#eee2c6'],[10,12,8,8,4,'#c9a46c'],[0,6,3,18,10,'#6b4f2d'],[46,6,16,20,6,'#eee2c6'],[44,6,2,20,14,'#8a6a43'],[40,29,18,8,5,'#f4efe4'],[62,29,6,9,8,'#a07a48']]},
+{name:'Grand Suite',to:30,bed:2,bath:2.5,area:1350,price:38000,W:76,D:48,desc:'Two bedrooms around an open living and dining room, made for families and long stays.',
+ rooms:[['living','Living & Dining',0,0,42,48,'#b98b55'],['bed','Master Bedroom',42,0,34,28,'#b98b55'],['bed','Guest Bedroom',42,28,34,20,'#b98b55']],
+ f:[[5,26,22,9,6,'#eee2c6'],[12,14,8,8,4,'#c9a46c'],[26,34,12,8,5,'#a07a48'],[56,6,16,20,6,'#eee2c6'],[54,6,2,20,14,'#8a6a43'],[56,34,14,12,6,'#eee2c6'],[54,34,2,12,12,'#8a6a43']]},
+{name:'Royal Penthouse',to:31,bed:3,bath:3.5,area:2900,price:95000,W:80,D:56,desc:'The entire top floor: a great room, a private terrace with loungers, a master suite and a spa bath.',
+ rooms:[['living','Great Room',0,0,48,40,'#b98b55'],['terr','Terrace',0,40,48,16,'#7b5b36'],['bed','Master Suite',48,0,32,28,'#b98b55'],['bath','Spa Bath',48,28,32,28,'#ded6c6']],
+ f:[[6,24,24,10,6,'#eee2c6'],[14,12,10,8,4,'#c9a46c'],[6,44,16,5,5,'#d9c28a'],[26,44,16,5,5,'#d9c28a'],[60,6,14,18,6,'#eee2c6'],[58,6,2,18,14,'#8a6a43'],[52,36,24,10,6,'#f4efe4']]}]};
+/* Drop real photos here, keyed by room kind: bed, living, bath, terr. Use data: URIs, e.g. {bed:'data:image/jpeg;base64,...'} */
+const ROOM_PHOTOS={};
+/* ===== engine ===== */
+const $=s=>document.querySelector(s),fmt=n=>CFG.cur+n.toLocaleString('en-IN');
+$('#bn').textContent=CFG.brand;$('#bt').textContent=CFG.tag;document.title=CFG.brand+' — Concept Hotel Website';$('.br i').textContent=CFG.brand.replace('THE ','')[0];
+let seed=7;const R=()=>(seed=seed*16807%2147483647)/2147483647;
+const tierOf=n=>CFG.tiers.find(t=>n<=t.to),isB=n=>n%5===0,priceOf=n=>tierOf(n).price+(n-CFG.floors[0])*350;
+const sh=(h,f)=>'#'+h.slice(1).match(/../g).map(v=>Math.min(255,Math.round(parseInt(v,16)*f)).toString(16).padStart(2,'0')).join('');
+let cur=0,tier=null,ri=0,tipN=0;
+function show(id){document.querySelectorAll('.sc').forEach(e=>e.classList.toggle('on',e.id===id))}
+function go(id,fn){const f=$('#fd');f.classList.add('on');setTimeout(()=>{fn&&fn();show(id);f.classList.remove('on')},520)}
+/* tower */
+(function(){seed=7;const [a,b]=CFG.floors,N=b-a+1,y0=150,fh=610/N;let h=`<defs><linearGradient id="sk" x2="0" y2="1"><stop offset="0" stop-color="#0d4aa0"/><stop offset=".6" stop-color="#4c9be0"/><stop offset="1" stop-color="#a5cdf0"/></linearGradient><linearGradient id="wt" x2="0" y2="1"><stop offset="0" stop-color="#1a4a86"/><stop offset="1" stop-color="#071a3c"/></linearGradient><linearGradient id="gl" x2="0" y2="1"><stop offset="0" stop-color="#2d6cae"/><stop offset="1" stop-color="#173f73"/></linearGradient><linearGradient id="rf" x2="0" y2="1"><stop offset="0" stop-color="#f0b650" stop-opacity=".6"/><stop offset="1" stop-color="#f0b650" stop-opacity="0"/></linearGradient><filter id="bl"><feGaussianBlur stdDeviation="16"/></filter></defs><rect width="1600" height="900" fill="url(#sk)"/>`;
+for(let i=0;i<6;i++)h+=`<ellipse class="cl" cx="${150+i*290}" cy="${130+R()*330}" rx="${110+R()*90}" ry="${24+R()*18}" fill="#fff" opacity=".5" filter="url(#bl)"/>`;
+[[40,130,420],[190,90,300],[300,70,190],[1010,80,230],[1100,120,340],[1250,140,430],[1420,130,310],[870,70,170]].forEach(([x,w,hh])=>{h+=`<rect x="${x}" y="${770-hh}" width="${w}" height="${hh}" fill="#5f84ad" opacity=".92"/>`;for(let yy=770-hh+14;yy<755;yy+=22)for(let xx=x+8;xx<x+w-10;xx+=16)if(R()<.3)h+=`<rect x="${xx}" y="${yy}" width="8" height="11" fill="#ffd27a" opacity=".85"/>`});
+h+=`<rect x="690" y="124" width="220" height="30" fill="#356ca6"/><rect x="700" y="116" width="200" height="10" fill="#4d82b8"/>`;
+for(let n=b;n>=a;n--){const y=y0+(b-n)*fh;h+=`<g class="fl" data-n="${n}"><rect x="700" y="${y}" width="200" height="${fh}" fill="url(#gl)"/>`;for(let c=0;c<10;c++)h+=`<rect class="${R()<.25?'tw1':''}" x="${703+c*20}" y="${y+fh*.22}" width="14" height="${fh*.56}" fill="${R()<.32?'#ffcf70':'#244f86'}" opacity="${.7+R()*.3}"/>`;h+=`<rect class="bd" x="700" y="${y}" width="200" height="${fh}"/></g>`}
+h+=`<rect x="640" y="745" width="320" height="26" fill="#d8aa5c"/><rect x="640" y="758" width="320" height="12" fill="#f4cf84" opacity=".8"/>`;for(let i=0;i<9;i++)h+=`<ellipse cx="${660+i*37}" cy="742" rx="11" ry="16" fill="#24402a"/>`;
+h+=`<rect y="770" width="1600" height="130" fill="url(#wt)"/><rect x="690" y="772" width="220" height="130" fill="url(#rf)"/>`;for(let i=0;i<22;i++)h+=`<rect class="sh" x="${R()*1500}" y="${780+R()*110}" width="${60+R()*180}" height="2" fill="#8fc0f0" opacity=".35" style="animation-delay:${-R()*5}s"/>`;
+$('#tw').innerHTML=h})();
+const tw=$('#tw'),tip=$('#tip'),ln=$('#tln');let hov=null;
+function showTip(n,el){const t=tierOf(n),r=el.getBoundingClientRect(),W=innerWidth;let left=Math.min(r.right+64,W-236),top=Math.max(80,r.top+r.height/2-52);tipN=n;
+tip.innerHTML=`<small>FLOOR</small><b>${n}</b><h4>${t.name}</h4><p>${t.bed} Bed · ${t.bath} Bath · ${t.area.toLocaleString()} sq ft</p><em>${isB(n)?'Booked tonight':'Available · from '+fmt(priceOf(n))}</em>`;
+tip.style.left=left+'px';tip.style.top=top+'px';tip.classList.add('on');ln.style.left=r.right+'px';ln.style.top=(r.top+r.height/2)+'px';ln.style.width=Math.max(10,left-r.right)+'px';ln.classList.add('on')}
+function hide(){tip.classList.remove('on');ln.classList.remove('on');if(hov)hov.classList.remove('on');hov=null}
+function hoverF(f){if(f===hov)return;if(hov)hov.classList.remove('on');hov=f;f.classList.add('on');showTip(+f.dataset.n,f.querySelector('.bd'))}
+tw.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const f=e.target.closest('.fl');if(!f){hide();return}hoverF(f)});
+tw.addEventListener('pointerleave',()=>{if(!matchMedia('(pointer:coarse)').matches)hide()});
+tw.addEventListener('click',e=>{const f=e.target.closest('.fl');if(!f){hide();return}if(matchMedia('(pointer:coarse)').matches&&hov!==f){hoverF(f);return}openFloor(+f.dataset.n)});
+tip.onclick=()=>openFloor(tipN);if(matchMedia('(pointer:coarse)').matches)document.querySelector('.hint').textContent='Tap a floor to explore';
+/* floor plan (isometric) */
+function openFloor(n){cur=n;tier=tierOf(n);hide();go('s2',drawPlan)}
+function drawPlan(){const t=tier,W=t.W,D=t.D,S=1020/(W+D),C=.866*S,Nn=.5*S,ox=500-(W-D)*C/2,oy=318-(W+D)*Nn/2;
+const P=(x,y,z=0)=>(ox+(x-y)*C).toFixed(1)+','+(oy+(x+y)*Nn-z).toFixed(1),pl=(p,f,x='')=>`<polygon points="${p.map(q=>P(...q)).join(' ')}" fill="${f}" ${x}/>`;
+const box=(x,y,w,d,h,c)=>pl([[x,y,h],[x+w,y,h],[x+w,y+d,h],[x,y+d,h]],sh(c,1.12))+pl([[x,y+d,0],[x+w,y+d,0],[x+w,y+d,h],[x,y+d,h]],sh(c,.7))+pl([[x+w,y,0],[x+w,y+d,0],[x+w,y+d,h],[x+w,y,h]],sh(c,.88));
+let i=0;const o=s=>`<g class="o" style="--d:${(i++)*26}ms">${s}</g>`;let g='';
+g+=o(pl([[0,D,0],[W,D,0],[W,D,-7],[0,D,-7]],'#2a1f12')+pl([[W,0,0],[W,D,0],[W,D,-7],[W,0,-7]],'#3d2d1a'));
+t.rooms.forEach(r=>g+=o(pl([[r[2],r[3]],[r[2]+r[4],r[3]],[r[2]+r[4],r[3]+r[5]],[r[2],r[3]+r[5]]],r[6],'stroke="#0003"')));
+g+=o(pl([[0,0,34],[0,D,34],[0,D,0],[0,0,0]],'#e7dcc4')+pl([[0,0,34],[W,0,34],[W,0,0],[0,0,0]],'#d3c6a8'));
+const ob=[];t.rooms.forEach(r=>{if(r[2]>0)ob.push([r[2]-.6,r[3],1.2,r[5],12,'#efe6d2']);if(r[3]>0)ob.push([r[2],r[3]-.6,r[4],1.2,12,'#efe6d2'])});t.f.forEach(f=>ob.push(f));
+ob.sort((p,q)=>p[0]+p[1]+(p[2]+p[3])/2-q[0]-q[1]-(q[2]+q[3])/2).forEach(b=>g+=o(box(...b)));
+t.rooms.forEach((r,k)=>g+=`<g class="hs" data-i="${k}" transform="translate(${P(r[2]+r[4]/2,r[3]+r[5]/2,28)})"><circle r="24" fill="transparent"/><circle class="pu" r="8"/><circle r="5.5" fill="#fff"/><text y="-18" text-anchor="middle">${r[1]}</text></g>`);
+$('#pl').innerHTML=g;$('#pf').textContent='Floor '+cur+' · '+(isB(cur)?'Booked tonight':'Available');$('#pt').textContent=t.name;$('#p1').textContent=t.bed;$('#p2').textContent=t.bath;$('#p3').textContent=t.area.toLocaleString();$('#pp').textContent=fmt(priceOf(cur));$('#pd').textContent=t.desc;
+$('#rl').innerHTML=t.rooms.map((r,k)=>`<li data-i="${k}"><span>${r[1]}</span></li>`).join('')}
+$('#pl').addEventListener('click',e=>{const h=e.target.closest('.hs');if(h)openRoom(+h.dataset.i)});
+$('#rl').addEventListener('click',e=>{const l=e.target.closest('li');if(l)openRoom(+l.dataset.i)});
+$('#b1').onclick=()=>go('s1',hide);$('#b2').onclick=()=>openRoom(0);$('#b3').onclick=()=>go('s2');
+/* room view */
+function openRoom(k){ri=k;go('s3',drawRoom)}
+function drawRoom(){const r=tier.rooms[ri],k=r[0];$('#room').innerHTML=ROOM_PHOTOS[k]?`<img src="${ROOM_PHOTOS[k]}" alt="${r[1]}">`:roomSVG(k);$('#c1').textContent='Floor '+cur+' · '+tier.name;$('#c2').textContent=r[1];
+$('#sw').innerHTML=tier.rooms.map((x,j)=>`<button class="${j===ri?'on':''}" data-i="${j}">${x[1]}</button>`).join('')}
+$('#sw').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&+b.dataset.i!==ri)openRoom(+b.dataset.i)});
+function roomSVG(k){seed=k.length*977;const T=k==='terr',wx=T?0:380,wy=T?0:120,ww=T?1600:840,wh=T?650:440;
+let s=`<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="ws" x2="0" y2="1"><stop offset="0" stop-color="#13305f"/><stop offset=".55" stop-color="#5f93cf"/><stop offset=".66" stop-color="#f4b676"/><stop offset=".67" stop-color="#173a67"/><stop offset="1" stop-color="#0a1f44"/></linearGradient><linearGradient id="wl" x2="0" y2="1"><stop offset="0" stop-color="#f3dcae"/><stop offset="1" stop-color="#c79f67"/></linearGradient><linearGradient id="fl" x2="0" y2="1"><stop offset="0" stop-color="#a77a45"/><stop offset="1" stop-color="#5a3f20"/></linearGradient><radialGradient id="gw"><stop offset="0" stop-color="#ffe3a0" stop-opacity=".95"/><stop offset="1" stop-color="#ffe3a0" stop-opacity="0"/></radialGradient></defs><rect width="1600" height="900" fill="url(#wl)"/><rect x="${wx}" y="${wy}" width="${ww}" height="${wh}" fill="url(#ws)"/>`;
+for(let i=0;i<60;i++)s+=`<rect x="${wx+R()*ww}" y="${wy+wh*(.6+R()*.1)}" width="${2+R()*5}" height="${2+R()*6}" fill="#ffd98a" opacity=".8"/>`;
+if(!T){s+=`<rect x="${wx}" y="${wy}" width="${ww}" height="${wh}" fill="none" stroke="#3a2a18" stroke-width="12"/>`;for(let i=1;i<4;i++)s+=`<rect x="${wx+ww*i/4-4}" y="${wy}" width="8" height="${wh}" fill="#3a2a18"/>`;s+=`<rect x="300" y="100" width="110" height="560" fill="#f6ecd2" opacity=".9"/><rect x="1190" y="100" width="110" height="560" fill="#f6ecd2" opacity=".9"/>`}
+s+=`<rect y="650" width="1600" height="250" fill="url(#fl)"/>`;for(let i=0;i<14;i++)s+=`<rect y="${650+i*i*1.4+i*8}" width="1600" height="2" fill="#0004"/>`;
+if(k==='bed')s+=`<ellipse cx="800" cy="820" rx="560" ry="70" fill="#c9ab76" opacity=".55"/><rect x="480" y="360" width="640" height="270" rx="16" fill="#e9dcbd"/><rect x="450" y="560" width="700" height="200" rx="22" fill="#f0e5cb"/><rect x="450" y="650" width="700" height="110" rx="18" fill="#c9ab76"/><rect x="520" y="520" width="190" height="80" rx="30" fill="#fff6e0"/><rect x="890" y="520" width="190" height="80" rx="30" fill="#fff6e0"/><rect x="330" y="590" width="90" height="160" fill="#6b4f2d"/><rect x="1180" y="590" width="90" height="160" fill="#6b4f2d"/><circle cx="375" cy="500" r="140" fill="url(#gw)"/><circle cx="1225" cy="500" r="140" fill="url(#gw)"/><rect x="360" y="500" width="30" height="90" fill="#d9c28a"/><rect x="1210" y="500" width="30" height="90" fill="#d9c28a"/>`;
+else if(k==='living')s+=`<ellipse cx="800" cy="790" rx="620" ry="80" fill="#c9ab76" opacity=".6"/><path d="M420 760V610q0-80 90-80h580q90 0 90 80v150z" fill="#efe6d0"/><rect x="400" y="660" width="800" height="100" rx="40" fill="#f6eed9"/><ellipse cx="800" cy="830" rx="150" ry="36" fill="#c9a46c"/><rect x="650" y="780" width="300" height="30" rx="15" fill="#d8b87c"/><circle cx="1330" cy="520" r="150" fill="url(#gw)"/><rect x="1324" y="500" width="12" height="260" fill="#d9c28a"/>`;
+else if(k==='bath')s+=`<rect x="1000" y="260" width="360" height="300" fill="#fff2d0" opacity=".85"/><circle cx="1180" cy="400" r="230" fill="url(#gw)" opacity=".6"/><ellipse cx="640" cy="800" rx="330" ry="80" fill="#fbf6ea"/><rect x="330" y="640" width="620" height="140" rx="70" fill="#f4eee0"/><rect x="1010" y="570" width="340" height="150" fill="#6b4f2d"/><rect x="1010" y="560" width="340" height="22" fill="#e9e1cf"/>`;
+else s+=`<rect y="600" width="1600" height="8" fill="#dfe7ee" opacity=".7"/>`+[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(i=>`<rect x="${i*104}" y="600" width="3" height="80" fill="#dfe7ee" opacity=".5"/>`).join('')+`<rect x="260" y="700" width="480" height="90" rx="26" fill="#efe3c8"/><rect x="900" y="700" width="480" height="90" rx="26" fill="#efe3c8"/>`+[0,1,2,3,4,5,6,7,8,9,10].map(i=>`<circle cx="${i*150+40}" cy="${120+Math.sin(i)*20}" r="7" fill="#ffd98a"/><circle cx="${i*150+40}" cy="${120+Math.sin(i)*20}" r="30" fill="url(#gw)" opacity=".5"/>`).join('');
+return s+'</svg>'}
+/* nav */
+$('#hm').onclick=$('#n1').onclick=()=>go('s1',hide);
+$('#n2').onclick=()=>openFloor(CFG.floors[1]);
+$('#n3').onclick=()=>{cur=CFG.floors[1];tier=tierOf(cur);ri=tier.rooms.findIndex(r=>r[0]==='terr');openRoom(Math.max(0,ri))};
+$('#n4').onclick=()=>{if(!tier){cur=CFG.floors[1];tier=tierOf(cur)}openRoom(0)};
+</script></body></html>
